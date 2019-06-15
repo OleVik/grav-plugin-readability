@@ -1,3 +1,9 @@
+# v1.0.3
+##  XX-06-2019
+
+1. [](#bugfix)
+    * Pathing in scripts, workers
+
 # v1.0.2
 ##  15-06-2019
 

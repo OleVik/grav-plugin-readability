@@ -119,6 +119,7 @@ class ReadabilityPlugin extends Plugin
         $this->grav['assets']->addJs($path . '/node_modules/localized-readability/dist/localized-readability.min.js');
         $this->grav['assets']->addInlineJs(
             'const readabilityLanguage = "' . self::getLanguage() . '";' . "\n" .
+            'const readabilityBaseUrl = "' . $this->grav['uri']->rootUrl(true) . '";' . "\n" .
             'const readabilityTooltips = "' . $this->grav['config']->get('plugins.readability.tooltips') . '";'
         );
         $this->grav['assets']->addJs($path . '/js/admin.js', ["group" => "bottom"]);

@@ -1,17 +1,15 @@
 self.importScripts(
-  "/user/plugins/readability/node_modules/promise-worker/dist/promise-worker.register.min.js"
+  "../../node_modules/promise-worker/dist/promise-worker.register.min.js"
 );
 
 registerPromiseWorker(function(data) {
   importScripts(
-    "/user/plugins/readability/node_modules/localized-readability/dist/hypher.js",
-    `/user/plugins/readability/node_modules/localized-readability/dist/patterns/${
+    "../../node_modules/localized-readability/dist/hypher.js",
+    `../../node_modules/localized-readability/dist/patterns/${data.lang}.js`,
+    `../../node_modules/localized-readability/dist/annotations/language.${
       data.lang
     }.js`,
-    `/user/plugins/readability/node_modules/localized-readability/dist/annotations/language.${
-      data.lang
-    }.js`,
-    "/user/plugins/readability/node_modules/localized-readability/dist/localized-readability.js"
+    "../../node_modules/localized-readability/dist/localized-readability.js"
   );
   try {
     const Parser = LocalizedReadability.parser;

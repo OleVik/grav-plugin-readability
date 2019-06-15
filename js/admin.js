@@ -336,16 +336,27 @@ window.addEventListener(
         Annotations.general.counts;
 
       var readabilityWorker = new PromiseWorker(
-        new Worker("/user/plugins/readability/js/workers/readability.js")
+        new Worker(
+          readabilityBaseUrl +
+            "/user/plugins/readability/js/workers/readability.js"
+        )
       );
       var paragraphsWorker = new PromiseWorker(
-        new Worker("/user/plugins/readability/js/workers/paragraphs.js")
+        new Worker(
+          readabilityBaseUrl +
+            "/user/plugins/readability/js/workers/paragraphs.js"
+        )
       );
       var sentencesWorker = new PromiseWorker(
-        new Worker("/user/plugins/readability/js/workers/sentences.js")
+        new Worker(
+          readabilityBaseUrl +
+            "/user/plugins/readability/js/workers/sentences.js"
+        )
       );
       var wordsWorker = new PromiseWorker(
-        new Worker("/user/plugins/readability/js/workers/words.js")
+        new Worker(
+          readabilityBaseUrl + "/user/plugins/readability/js/workers/words.js"
+        )
       );
 
       if (readabilityTooltips) {
