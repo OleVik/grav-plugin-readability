@@ -16,6 +16,9 @@ function renderScore(data, Annotations) {
   document.querySelector(
     ".readability #automated-readability-index .title"
   ).innerHTML = Annotations.stats.automatedReadability.title;
+  document.querySelector(
+    ".readability #automated-readability-index .description"
+  ).innerHTML = Annotations.stats.automatedReadability.description;
   document
     .querySelector("#automated-readability-index .title")
     .setAttribute("title", Annotations.stats.automatedReadability.description);
@@ -33,6 +36,8 @@ function renderScore(data, Annotations) {
   ).innerHTML = data.interpretations.automatedReadability.grade;
   document.querySelector(".readability #flesch .title").innerHTML =
     Annotations.stats.flesch.title;
+  document.querySelector(".readability #flesch .description").innerHTML =
+    Annotations.stats.flesch.description;
   document
     .querySelector("#flesch .title")
     .setAttribute("title", Annotations.stats.flesch.description);
@@ -40,6 +45,9 @@ function renderScore(data, Annotations) {
     data.interpretations.flesch;
   document.querySelector(".readability #flesch-kincaid .title").innerHTML =
     Annotations.stats.fleschKincaid.title;
+  document.querySelector(
+    ".readability #flesch-kincaid .description"
+  ).innerHTML = Annotations.stats.fleschKincaid.description;
   document
     .querySelector("#flesch-kincaid .title")
     .setAttribute("title", Annotations.stats.fleschKincaid.description);
@@ -53,6 +61,8 @@ function renderScore(data, Annotations) {
     data.interpretations.fleschKincaid.grade;
   document.querySelector(".readability #coleman-liau .title").innerHTML =
     Annotations.stats.colemanLiau.title;
+  document.querySelector(".readability #coleman-liau .description").innerHTML =
+    Annotations.stats.colemanLiau.description;
   document
     .querySelector("#coleman-liau .title")
     .setAttribute("title", Annotations.stats.colemanLiau.description);
@@ -66,6 +76,8 @@ function renderScore(data, Annotations) {
     data.interpretations.colemanLiau.grade;
   document.querySelector(".readability #smog .title").innerHTML =
     Annotations.stats.smog.title;
+  document.querySelector(".readability #smog .description").innerHTML =
+    Annotations.stats.smog.description;
   document
     .querySelector("#smog .title")
     .setAttribute("title", Annotations.stats.smog.description);
@@ -79,6 +91,8 @@ function renderScore(data, Annotations) {
     data.interpretations.smog.grade;
   document.querySelector(".readability #lix .title").innerHTML =
     Annotations.stats.lix.title;
+  document.querySelector(".readability #lix .description").innerHTML =
+    Annotations.stats.lix.description;
   document
     .querySelector("#lix .title")
     .setAttribute("title", Annotations.stats.lix.description);
@@ -86,6 +100,8 @@ function renderScore(data, Annotations) {
     data.interpretations.lix;
   document.querySelector(".readability #rix .title").innerHTML =
     Annotations.stats.rix.title;
+  document.querySelector(".readability #rix .description").innerHTML =
+    Annotations.stats.rix.description;
   document
     .querySelector("#rix .title")
     .setAttribute("title", Annotations.stats.rix.description);
