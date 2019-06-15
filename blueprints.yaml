@@ -6,11 +6,13 @@ author:
   name: Ole Vik
   email: git@olevik.net
 homepage: https://github.com/OleVik/grav-plugin-readability
-demo: http://demo.yoursite.com
-keywords: grav, plugin, etc
+keywords: grav, plugin, readability, automated readability index, characters, coleman-liau, flesch, flesch-kincaid, letters, lix, localized, long words, paragraphs, periods, polysillabic words, punctuations, readability, rix, sentences, smog, syllables, textstat, whitespaces, words
 bugs: https://github.com/OleVik/grav-plugin-readability/issues
 docs: https://github.com/OleVik/grav-plugin-readability/blob/develop/README.md
 license: MIT
+dependencies:
+  - { name: grav, version: ">=1.6" }
+  - { name: admin, version: ">=1.9" }
 
 form:
   validation: strict
