@@ -1,4 +1,28 @@
 /**
+ * Convert milliseconds to human readable time
+ * @param {number} millisec Float containing milliseconds
+ * @see https://stackoverflow.com/a/32180863
+ */
+function msToTime(millisec) {
+  var milliseconds = millisec.toFixed(2);
+  var seconds = (millisec / 1000).toFixed(1);
+  var minutes = (millisec / (1000 * 60)).toFixed(1);
+  var hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+  var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+  if (seconds <= 0) {
+    return milliseconds + " ms";
+  } else if (seconds < 60) {
+    return seconds + " sec";
+  } else if (minutes < 60) {
+    return minutes + " min";
+  } else if (hours < 24) {
+    return hours + " hrs";
+  } else {
+    return days + " days";
+  }
+}
+
+/**
  * Render individual parts of Score
  * @param {object} data Generated data
  */
@@ -172,6 +196,7 @@ function renderAnalysis(
   sentencesWorker,
   wordsWorker
 ) {
+  const start = performance.now();
   const colors = {
     one: "#D90023",
     two: "#D94900",
@@ -181,16 +206,19 @@ function renderAnalysis(
   const results = {};
   document.querySelector("#readability-render").style.backgroundColor =
     colors.one;
+  console.debug("Start Score: " + msToTime(performance.now() - start));
   return readabilityWorker
     .postMessage({ input: input, lang: lang })
     .then(function(response) {
       results.data = response;
       renderScore(results.data, Annotations);
+      console.debug("End Score: " + msToTime(performance.now() - start));
       var readabilityElement = document.querySelector(".readability");
       readabilityElement.style.display = "grid";
       const nlcst = results.data.setup.nlcst;
       document.querySelector("#readability-render").style.backgroundColor =
         colors.two;
+      console.debug("Start Paragraphs: " + msToTime(performance.now() - start));
       return paragraphsWorker.postMessage({ nlcst });
     })
     .then(function(response) {
@@ -198,9 +226,11 @@ function renderAnalysis(
       document.getElementsByTagName(
         "content"
       )[0].innerHTML = Highlighter.stringify(results.paragraphs);
+      console.debug("End Paragraphs: " + msToTime(performance.now() - start));
       const nlcst = results.paragraphs;
       document.querySelector("#readability-render").style.backgroundColor =
         colors.three;
+      console.debug("Start Sentences: " + msToTime(performance.now() - start));
       return sentencesWorker.postMessage({ nlcst });
     })
     .then(function(response) {
@@ -208,9 +238,11 @@ function renderAnalysis(
       document.getElementsByTagName(
         "content"
       )[0].innerHTML = Highlighter.stringify(results.sentences);
+      console.debug("End Sentences: " + msToTime(performance.now() - start));
       const nlcst = results.sentences;
       document.querySelector("#readability-render").style.backgroundColor =
         colors.four;
+      console.debug("Start Words: " + msToTime(performance.now() - start));
       return wordsWorker.postMessage({ nlcst, lang: lang });
     })
     .then(function(response) {
@@ -218,11 +250,14 @@ function renderAnalysis(
       document.getElementsByTagName(
         "content"
       )[0].innerHTML = Highlighter.stringify(results.words);
+      console.debug("End Words: " + msToTime(performance.now() - start));
       document
         .querySelector("#readability-render")
         .style.removeProperty("background-color");
       if (readabilityTooltips) {
+        console.debug("Start Tooltips: " + msToTime(performance.now() - start));
         createTooltips();
+        console.debug("Start Tooltips: " + msToTime(performance.now() - start));
       }
     })
     .catch(function(error) {

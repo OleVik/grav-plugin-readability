@@ -1,4 +1,7 @@
 en:
   PLUGIN_READABILITY:
-    LANGUAGE: Language to use for measuring readability.
-    TOOLTIPS: Indicate sentence- and word-difficulty with tooltips.
+    LANGUAGE:
+      DESCRIPTION: Language to use for measuring readability.
+    TOOLTIPS:
+      LABEL: Tooltips
+      DESCRIPTION: Indicate sentence- and word-difficulty with tooltips.

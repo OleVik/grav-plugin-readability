@@ -1,5 +1,5 @@
 name: Readability
-version: 1.0.1
+version: 1.0.2
 description: Measure the readability of your writing.
 icon: file-text-o
 author:
@@ -28,12 +28,12 @@ form:
     language:
       type: select
       label: PLUGIN_ADMIN.LANGUAGE
-      description: PLUGIN_READABILITY.LANGUAGE
+      description: PLUGIN_READABILITY.LANGUAGE.DESCRIPTION
       data-options@: '\Grav\Plugin\ReadabilityPlugin::getLanguages'
     tooltips:
       type: toggle
-      label: PLUGIN_ADMIN.PLUGIN_STATUS
-      description: PLUGIN_READABILITY.TOOLTIPS
+      label: PLUGIN_READABILITY.TOOLTIPS.LABEL
+      description: PLUGIN_READABILITY.TOOLTIPS.DESCRIPTION
       highlight: 1
       default: 0
       options:
