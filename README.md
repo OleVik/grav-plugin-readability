@@ -46,7 +46,7 @@ tooltips: false
 
 The `language`-string corresponds to the [patterns defined by the Fluid Project](https://github.com/fluid-project/hyphenation-patterns/tree/master/patterns), specifically the name of the file without the extension.
 
-If `tooltips` is set to `true`, sentences and words can be focused by hover them with your mouse pointer, to point out difficulty. The sentence-difficulty is displayed above the sentence, and word-difficulty below the word.
+If `tooltips` is set to `true`, sentences and words can be focused by hovering over them with your mouse pointer, to point out difficulty. The sentence-difficulty is displayed above the sentence, and word-difficulty below the word.
 
 ## Usage
 
