@@ -1,6 +1,6 @@
 # Readability Plugin
 
-The **Readability** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav), and lets you measure the readability of your writing within the Admin Plugin, as well as highlight the difficulty of sentences and words based on these measures.
+The **Readability** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav), and lets you measure the readability of your writing within the Admin Plugin, as well as highlight the difficulty of sentences and words.
 
 ## Installation
 
@@ -60,11 +60,11 @@ And output is rendered:
 
 Optionally focused on:
 
-![Readability button](assets/button.png)
+![Readability button](assets/tooltips.png)
 
 ## Contributing
 
-**Note:** This plugin largely wraps the [Localized Readability](https://github.com/OleVik/localized-readability/) package for Node up for use with Grav, hence languages are not added here. See the [Contributing-section](https://github.com/OleVik/localized-readability#contributing) on that repository for information about adding languages.
+This plugin largely wraps the [Localized Readability](https://github.com/OleVik/localized-readability/) package for Node up for use with Grav, hence languages are not added here. See the [Contributing-section](https://github.com/OleVik/localized-readability#contributing) on that repository for information about adding languages.
 
 ## Credits
 

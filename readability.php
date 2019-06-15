@@ -18,7 +18,7 @@ use Grav\Common\Plugin;
 use RocketTheme\Toolbox\Event\Event;
 
 /**
- * Creates slides using Reveal.js
+ * Measure the readability of text, and highlight the difficulty of sentences and words.
  *
  * Class ReadabilityPlugin
  *
