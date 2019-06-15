@@ -1,0 +1,17 @@
+{
+  "name": "grav-plugin-readability",
+  "version": "1.0.0",
+  "description": "Measure the readability of your writing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ole Vik",
+  "license": "MIT",
+  "dependencies": {
+    "localized-readability": "^1.1.0",
+    "popper.js": "^1.15.0",
+    "promise-worker": "^2.0.1",
+    "tippy.js": "^4.3.4"
+  }
+}

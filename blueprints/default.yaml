@@ -1,0 +1,17 @@
+title: Readability
+extends@:
+  type: default
+  context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          fields:
+            links:
+              type: readability
+              ordering@: content

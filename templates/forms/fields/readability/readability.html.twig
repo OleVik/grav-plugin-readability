@@ -1,0 +1,87 @@
+{% extends "forms/field.html.twig" %}
+
+{% block contents %}
+    <div class="readability">
+        <main>
+            <h2 id="header-main"></h2>
+            <content></content>
+        </main>
+        <aside>
+            <h2 id="header-score"></h2>
+            <section id="consensus">
+            <p class="description"></p>
+            <label class="age"></label>
+            <value class="age"></value>
+            <label class="grade"></label>
+            <value class="grade"></value>
+            </section>
+            <h3 id="header-interpretations"></h3>
+            <section id="automated-readability-index">
+            <h4 class="title"></h4>
+            <label class="age"></label>
+            <value class="age"></value>
+            <label class="grade"></label>
+            <value class="grade"></value>
+            </section>
+            <section id="flesch">
+            <h4 class="title"></h4>
+            <p class="value"></p>
+            </section>
+            <section id="flesch-kincaid">
+            <h4 class="title"></h4>
+            <label class="age"></label>
+            <value class="age"></value>
+            <label class="grade"></label>
+            <value class="grade"></value>
+            </section>
+            <section id="coleman-liau">
+            <h4 class="title"></h4>
+            <label class="age"></label>
+            <value class="age"></value>
+            <label class="grade"></label>
+            <value class="grade"></value>
+            </section>
+            <section id="smog">
+            <h4 class="title"></h4>
+            <label class="age"></label>
+            <value class="age"></value>
+            <label class="grade"></label>
+            <value class="grade"></value>
+            </section>
+            <section id="lix">
+            <h4 class="title"></h4>
+            <p class="value"></p>
+            </section>
+            <section id="rix">
+            <h4 class="title"></h4>
+            <label class="grade"></label>
+            <value class="grade"></value>
+            </section>
+            <h3 id="header-counts"></h3>
+            <section id="count">
+            <label class="paragraphs"></label>
+            <value class="paragraphs"></value>
+            <label class="sentences"></label>
+            <value class="sentences"></value>
+            <label class="words"></label>
+            <value class="words"></value>
+            <label class="syllables"></label>
+            <value class="syllables"></value>
+            <label class="polysillabic-words"></label>
+            <value class="polysillabic-words"></value>
+            <label class="letters"></label>
+            <value class="letters"></value>
+            <label class="characters"></label>
+            <value class="characters"></value>
+            <label class="longwords"></label>
+            <value class="longwords"></value>
+            <label class="periods"></label>
+            <value class="periods"></value>
+            <label class="punctuations"></label>
+            <value class="punctuations"></value>
+            <label class="whitespaces"></label>
+            <value class="whitespaces"></value>
+            </section>
+        </aside>
+    </div>
+{% endblock %}
