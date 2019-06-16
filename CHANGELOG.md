@@ -1,13 +1,15 @@
 # v1.0.3
-##  XX-06-2019
+##  16-06-2019
 
 1. [](#improved)
     * Pathing in scripts, workers
     * Inline registerPromiseWorker
     * Console-debug
+    * Languages.yaml
+    * Styling
 2. [](#new)
-    * Visual indicator
-    * Load the actual file needed
+    * Visual indicator and display
+    * Toggle to hide output
 
 # v1.0.2
 ##  15-06-2019

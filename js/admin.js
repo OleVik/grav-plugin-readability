@@ -27,16 +27,16 @@ function msToTime(millisec) {
  * @param {object} data Generated data
  */
 function renderScore(data, Annotations) {
-  document.querySelector(".readability #consensus .description").innerHTML =
-    Annotations.stats.consensus.description;
-  document.querySelector(".readability #consensus label.age").innerHTML =
-    Annotations.general.age;
-  document.querySelector(".readability #consensus value.age").innerHTML =
+  document.querySelector(".readability #consensus-age value").innerHTML =
     data.consensus.age;
-  document.querySelector(".readability #consensus label.grade").innerHTML =
-    Annotations.general.grade;
-  document.querySelector(".readability #consensus value.grade").innerHTML =
+  document
+    .querySelector(".readability #consensus-age")
+    .setAttribute("title", Annotations.stats.consensus.description);
+  document.querySelector(".readability #consensus-grade value").innerHTML =
     data.consensus.grade;
+  document
+    .querySelector(".readability #consensus-grade")
+    .setAttribute("title", Annotations.stats.consensus.description);
   document.querySelector(
     ".readability #automated-readability-index .title"
   ).innerHTML = Annotations.stats.automatedReadability.title;
@@ -200,16 +200,8 @@ function renderAnalysis(
   console.debug(
     "Starting Readability Analysis: " + msToTime(performance.now() - start)
   );
-  const colors = {
-    one: "#D90023",
-    two: "#D94900",
-    three: "#D9B500",
-    four: "#8FD900"
-  };
   const results = {};
   console.debug("Start Score: " + msToTime(performance.now() - start));
-  document.querySelector("#readability-render").style.backgroundColor =
-    colors.one;
   document
     .querySelector("#readability-render i.fa")
     .classList.remove("fa-file-text-o");
@@ -221,13 +213,12 @@ function renderAnalysis(
     .then(function(response) {
       results.data = response;
       renderScore(results.data, Annotations);
+      document.querySelector("#readability-toggle").style.display = "block";
       console.debug("End Score: " + msToTime(performance.now() - start));
-      var readabilityElement = document.querySelector(".readability");
+      const readabilityElement = document.querySelector(".readability");
       readabilityElement.style.display = "grid";
       const nlcst = results.data.setup.nlcst;
       console.debug("Start Paragraphs: " + msToTime(performance.now() - start));
-      document.querySelector("#readability-render").style.backgroundColor =
-        colors.two;
       return paragraphsWorker.postMessage({ nlcst, path: readabilityBaseUrl });
     })
     .then(function(response) {
@@ -238,8 +229,6 @@ function renderAnalysis(
       console.debug("End Paragraphs: " + msToTime(performance.now() - start));
       const nlcst = results.paragraphs;
       console.debug("Start Sentences: " + msToTime(performance.now() - start));
-      document.querySelector("#readability-render").style.backgroundColor =
-        colors.three;
       return sentencesWorker.postMessage({ nlcst, path: readabilityBaseUrl });
     })
     .then(function(response) {
@@ -250,8 +239,6 @@ function renderAnalysis(
       console.debug("End Sentences: " + msToTime(performance.now() - start));
       const nlcst = results.sentences;
       console.debug("Start Words: " + msToTime(performance.now() - start));
-      document.querySelector("#readability-render").style.backgroundColor =
-        colors.four;
       return wordsWorker.postMessage({
         nlcst,
         lang: lang,
@@ -348,25 +335,21 @@ window.addEventListener(
 
       renderButton();
 
-      document.querySelector(".readability #header-main").innerHTML =
-        Annotations.general.module;
-      document.querySelector(".readability #header-score").innerHTML =
-        Annotations.general.score;
       document.querySelector(".readability #header-interpretations").innerHTML =
         Annotations.general.interpretations;
       document.querySelector(".readability #header-counts").innerHTML =
         Annotations.general.counts;
 
-      var readabilityWorker = new PromiseWorker(
+      const readabilityWorker = new PromiseWorker(
         new Worker(readabilityBaseUrl + "/js/workers/readability.js")
       );
-      var paragraphsWorker = new PromiseWorker(
+      const paragraphsWorker = new PromiseWorker(
         new Worker(readabilityBaseUrl + "/js/workers/paragraphs.js")
       );
-      var sentencesWorker = new PromiseWorker(
+      const sentencesWorker = new PromiseWorker(
         new Worker(readabilityBaseUrl + "/js/workers/sentences.js")
       );
-      var wordsWorker = new PromiseWorker(
+      const wordsWorker = new PromiseWorker(
         new Worker(readabilityBaseUrl + "/js/workers/words.js")
       );
 
@@ -376,7 +359,7 @@ window.addEventListener(
         });
       }
 
-      var readabilityButton = document.querySelector("#readability-render");
+      const readabilityButton = document.querySelector("#readability-render");
       if (readabilityButton) {
         readabilityButton.addEventListener(
           "click",
@@ -391,6 +374,26 @@ window.addEventListener(
               sentencesWorker,
               wordsWorker
             );
+            event.preventDefault();
+          },
+          false
+        );
+      }
+      const readabilityToggle = document.querySelector("#readability-toggle");
+      if (readabilityToggle) {
+        readabilityToggle.addEventListener(
+          "click",
+          function(event) {
+            const readabilityElement = document.querySelector(".readability");
+            if (readabilityElement.style.display == "grid") {
+              readabilityToggle.classList.remove("fa-chevron-up");
+              readabilityToggle.classList.add("fa-chevron-down");
+              readabilityElement.style.display = "none";
+            } else {
+              readabilityToggle.classList.remove("fa-chevron-down");
+              readabilityToggle.classList.add("fa-chevron-up");
+              readabilityElement.style.display = "grid";
+            }
             event.preventDefault();
           },
           false

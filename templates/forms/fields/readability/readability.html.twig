@@ -1,20 +1,25 @@
 {% extends "forms/field.html.twig" %}
 
 {% block contents %}
+    <i id="readability-toggle" title="{{ "PLUGIN_READABILITY.TOGGLE.TITLE"|t }}" class="fa fa-chevron-up"></i>
     <div class="readability">
+        <header>
+            <h2 id="header-main">{{ "PLUGIN_READABILITY.NAME"|t }} {{ "PLUGIN_READABILITY.SUMMARY"|t }}</h2>
+            <section id="consensus-age">
+                <value></value>
+                <label>{{ "PLUGIN_READABILITY.REQUIREMENTS.AGE"|t }}</label>
+            </section>
+            <section id="consensus-grade">
+                <value></value>
+                <label>{{ "PLUGIN_READABILITY.REQUIREMENTS.GRADE"|t }}</label>
+            </section>
+        </header>
         <main>
-            <h2 id="header-main"></h2>
+            <h2>{{ "PLUGIN_READABILITY.HIGHLIGHT"|t }}</h2>
             <content></content>
         </main>
         <aside>
-            <h2 id="header-score"></h2>
-            <section id="consensus">
-                <p class="description"></p>
-                <label class="age"></label>
-                <value class="age"></value>
-                <label class="grade"></label>
-                <value class="grade"></value>
-            </section>
+            <h2 id="header-score">{{ "PLUGIN_READABILITY.DETAILS"|t }}</h2>
             <h3 id="header-interpretations"></h3>
             <section id="automated-readability-index">
                 <h4 class="title"></h4>

@@ -12,12 +12,41 @@
     "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
   word-break: break-word;
 }
+.readability header {
+  display: grid;
+  grid-gap: 0.5em 1em;
+  grid-template-columns: 3fr 2fr 2fr;
+  grid-template-rows: auto;
+  grid-column: span 2;
+  margin: 0;
+}
+.readability header h2 {
+  margin: auto 0 !important;
+  padding: 0 !important;
+  font-size: 1.75rem !important;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 0;
+}
+.readability header section {
+  display: block;
+}
+.readability header section label,
+.readability header section value {
+  padding: 0;
+  border-bottom: 0;
+  box-shadow: none;
+}
+.readability header section value {
+  font-size: 2.5em;
+}
 .readability main,
 .readability aside {
   background-color: hsl(0, 0%, 97.5%);
   border: 1px solid #e1e4e8;
 }
-.readability section {
+.readability main section,
+.readability aside section {
   display: grid;
   grid-gap: 0.5em 1em;
   grid-template-columns: auto;
@@ -90,11 +119,10 @@
   box-shadow: 0 2px 0 rgba(165, 16, 8, 1);
 }
 .readability h2 {
-  font-size: 3em;
   font-weight: 100;
   text-align: center;
   margin: 0;
-  padding: 1em 0;
+  padding: 0.15em 0;
   background-color: #ffffff;
   border-bottom: 1px solid #e1e4e8;
 }
@@ -131,4 +159,12 @@
   -o-transition: background-color 1000ms linear;
   -ms-transition: background-color 1000ms linear;
   transition: background-color 1000ms linear;
+}
+
+#readability-toggle {
+  display: none;
+  position: absolute;
+  right: 1.75rem;
+  cursor: pointer;
+  font-size: 16px;
 }

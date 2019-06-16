@@ -1,7 +1,16 @@
 en:
   PLUGIN_READABILITY:
+    NAME: Readability
+    SUMMARY: Summary
+    HIGHLIGHT: Highlighted
+    DETAILS: Details
+    REQUIREMENTS:
+      AGE: Age needed for reading
+      GRADE: Grade needed for reading
     LANGUAGE:
       DESCRIPTION: Language to use for measuring readability.
     TOOLTIPS:
       LABEL: Tooltips
       DESCRIPTION: Indicate sentence- and word-difficulty with tooltips.
+    TOGGLE:
+      TITLE: Toggle Readability Report
