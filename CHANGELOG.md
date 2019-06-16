@@ -7,6 +7,7 @@
     * Console-debug
 2. [](#new)
     * Visual indicator
+    * Load the actual file needed
 
 # v1.0.2
 ##  15-06-2019

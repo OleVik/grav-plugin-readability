@@ -5,7 +5,7 @@ registerPromiseWorker(function(data) {
   importScripts(
     `${
       data.path
-    }/node_modules/localized-readability/dist/localized-readability.js`
+    }/node_modules/localized-readability/dist/localized-readability.min.js`
   );
   try {
     const Highlighter = LocalizedReadability.highlighter;
