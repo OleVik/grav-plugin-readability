@@ -18,7 +18,7 @@ use Grav\Common\Plugin;
 use RocketTheme\Toolbox\Event\Event;
 
 /**
- * Measure the readability of text, and highlight the difficulty of sentences and words.
+ * Measure the readability of text, and highlight difficulty of sentences and words.
  *
  * Class ReadabilityPlugin
  *
@@ -104,25 +104,26 @@ class ReadabilityPlugin extends Plugin
     {
         $res = Grav::instance()['locator'];
         $path = $res->findResource('plugin://' . $this->name, false);
-        $this->grav['assets']->addCss($path . '/css/admin.css');
-        $this->grav['assets']->addJs($path . '/node_modules/promise-worker/dist/promise-worker.min.js');
+        $assets = $this->grav['assets'];
+        $assets->addCss($path . '/css/admin.css');
+        $assets->addJs($path . '/node_modules/promise-worker/dist/promise-worker.min.js');
         if ($this->grav['config']->get('plugins.readability.tooltips')) {
-            $this->grav['assets']->addCss($path . '/node_modules/tippy.js/index.css');
-            $this->grav['assets']->addCss($path . '/node_modules/tippy.js/themes/light.css');
-            $this->grav['assets']->addCss($path . '/node_modules/tippy.js/themes/light-border.css');
-            $this->grav['assets']->addJs($path . '/node_modules/popper.js/dist/umd/popper.min.js');
-            $this->grav['assets']->addJs($path . '/node_modules/tippy.js/umd/index.min.js');
+            $assets->addCss($path . '/node_modules/tippy.js/index.css');
+            $assets->addCss($path . '/node_modules/tippy.js/themes/light.css');
+            $assets->addCss($path . '/node_modules/tippy.js/themes/light-border.css');
+            $assets->addJs($path . '/node_modules/popper.js/dist/umd/popper.min.js');
+            $assets->addJs($path . '/node_modules/tippy.js/umd/index.min.js');
         }
-        $this->grav['assets']->addJs($path . '/node_modules/localized-readability/dist/hypher.js');
-        $this->grav['assets']->addJs($path . '/node_modules/localized-readability/dist/patterns/' . self::getLanguage() . '.js');
-        $this->grav['assets']->addJs($path . '/node_modules/localized-readability/dist/annotations/language.' . self::getLanguage() . '.js');
-        $this->grav['assets']->addJs($path . '/node_modules/localized-readability/dist/localized-readability.min.js');
-        $this->grav['assets']->addInlineJs(
+        $assets->addJs($path . '/node_modules/localized-readability/dist/hypher.js');
+        $assets->addJs($path . '/node_modules/localized-readability/dist/patterns/' . self::getLanguage() . '.js');
+        $assets->addJs($path . '/node_modules/localized-readability/dist/annotations/language.' . self::getLanguage() . '.js');
+        $assets->addJs($path . '/node_modules/localized-readability/dist/localized-readability.min.js');
+        $assets->addInlineJs(
             'const readabilityLanguage = "' . self::getLanguage() . '";' . "\n" .
-            'const readabilityBaseUrl = "' . $this->grav['uri']->rootUrl(true) . '";' . "\n" .
+            'const readabilityBaseUrl = "' . $this->grav['uri']->rootUrl(true) . '/' . $path . '";' . "\n" .
             'const readabilityTooltips = "' . $this->grav['config']->get('plugins.readability.tooltips') . '";'
         );
-        $this->grav['assets']->addJs($path . '/js/admin.js', ["group" => "bottom"]);
+        $assets->addJs($path . '/js/admin.js', ["group" => "bottom"]);
     }
 
     /**

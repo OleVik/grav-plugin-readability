@@ -1,9 +1,9 @@
 dependencies:
-  localized-readability: 1.0.0
+  localized-readability: 1.1.0
   popper.js: 1.15.0
   promise-worker: 2.0.1
   tippy.js: 4.3.4
-lockfileVersion: 5
+lockfileVersion: 5.1
 packages:
   /@fluid-project/hyphenation-patterns/0.2.2-dev.20181115T211247Z.d313a52:
     dev: false
@@ -163,7 +163,7 @@ packages:
       graceful-fs: 4.1.15
     resolution:
       integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=
-  /localized-readability/1.0.0:
+  /localized-readability/1.1.0:
     dependencies:
       '@fluid-project/hyphenation-patterns': 0.2.2-dev.20181115T211247Z.d313a52
       automated-readability: 1.0.4
@@ -181,7 +181,7 @@ packages:
       vfile: 4.0.1
     dev: false
     resolution:
-      integrity: sha512-PizLw6g//9pGp2DncwuZ4KVQxC0k9Ytf1kdALbuS13wAMtdIN+A1LJeJ6fWhwTRgtB6jlohfuB6Z180NagjgBw==
+      integrity: sha512-iOmwBcLGAWBjhsRHtxgEAstOFeNgPkZ9xE1uh1uq4p7dmY3xIz7+MPgJgDUbgD2boaz0UaW8X3DnmNzxUNI/Xg==
   /longest-streak/2.0.3:
     dev: false
     resolution:
@@ -489,7 +489,7 @@ packages:
     resolution:
       integrity: sha512-YO803/X+13GNaZB7fVopjvHH0uWQKgJkgKnU1YCjxShjKGVuN9PPHHW8g+uFDpkHpSTNi3rCMKMewIcbC1BAYg==
 specifiers:
-  localized-readability: ^1.0.0
+  localized-readability: ^1.1.0
   popper.js: ^1.15.0
   promise-worker: ^2.0.1
   tippy.js: ^4.3.4

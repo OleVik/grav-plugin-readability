@@ -197,6 +197,9 @@ function renderAnalysis(
   wordsWorker
 ) {
   const start = performance.now();
+  console.debug(
+    "Starting Readability Analysis: " + msToTime(performance.now() - start)
+  );
   const colors = {
     one: "#D90023",
     two: "#D94900",
@@ -204,11 +207,17 @@ function renderAnalysis(
     four: "#8FD900"
   };
   const results = {};
+  console.debug("Start Score: " + msToTime(performance.now() - start));
   document.querySelector("#readability-render").style.backgroundColor =
     colors.one;
-  console.debug("Start Score: " + msToTime(performance.now() - start));
+  document
+    .querySelector("#readability-render i.fa")
+    .classList.remove("fa-file-text-o");
+  document
+    .querySelector("#readability-render i.fa")
+    .classList.add("fa-spin", "fa-spinner");
   return readabilityWorker
-    .postMessage({ input: input, lang: lang })
+    .postMessage({ input: input, lang: lang, path: readabilityBaseUrl })
     .then(function(response) {
       results.data = response;
       renderScore(results.data, Annotations);
@@ -216,10 +225,10 @@ function renderAnalysis(
       var readabilityElement = document.querySelector(".readability");
       readabilityElement.style.display = "grid";
       const nlcst = results.data.setup.nlcst;
+      console.debug("Start Paragraphs: " + msToTime(performance.now() - start));
       document.querySelector("#readability-render").style.backgroundColor =
         colors.two;
-      console.debug("Start Paragraphs: " + msToTime(performance.now() - start));
-      return paragraphsWorker.postMessage({ nlcst });
+      return paragraphsWorker.postMessage({ nlcst, path: readabilityBaseUrl });
     })
     .then(function(response) {
       results.paragraphs = response;
@@ -228,10 +237,10 @@ function renderAnalysis(
       )[0].innerHTML = Highlighter.stringify(results.paragraphs);
       console.debug("End Paragraphs: " + msToTime(performance.now() - start));
       const nlcst = results.paragraphs;
+      console.debug("Start Sentences: " + msToTime(performance.now() - start));
       document.querySelector("#readability-render").style.backgroundColor =
         colors.three;
-      console.debug("Start Sentences: " + msToTime(performance.now() - start));
-      return sentencesWorker.postMessage({ nlcst });
+      return sentencesWorker.postMessage({ nlcst, path: readabilityBaseUrl });
     })
     .then(function(response) {
       results.sentences = response;
@@ -240,10 +249,14 @@ function renderAnalysis(
       )[0].innerHTML = Highlighter.stringify(results.sentences);
       console.debug("End Sentences: " + msToTime(performance.now() - start));
       const nlcst = results.sentences;
+      console.debug("Start Words: " + msToTime(performance.now() - start));
       document.querySelector("#readability-render").style.backgroundColor =
         colors.four;
-      console.debug("Start Words: " + msToTime(performance.now() - start));
-      return wordsWorker.postMessage({ nlcst, lang: lang });
+      return wordsWorker.postMessage({
+        nlcst,
+        lang: lang,
+        path: readabilityBaseUrl
+      });
     })
     .then(function(response) {
       results.words = response;
@@ -254,11 +267,20 @@ function renderAnalysis(
       document
         .querySelector("#readability-render")
         .style.removeProperty("background-color");
+      document
+        .querySelector("#readability-render i.fa")
+        .classList.remove("fa-spin", "fa-spinner");
+      document
+        .querySelector("#readability-render i.fa")
+        .classList.add("fa-file-text-o");
       if (readabilityTooltips) {
         console.debug("Start Tooltips: " + msToTime(performance.now() - start));
         createTooltips();
-        console.debug("Start Tooltips: " + msToTime(performance.now() - start));
+        console.debug("End Tooltips: " + msToTime(performance.now() - start));
       }
+      console.debug(
+        "Finished Readability Analysis: " + msToTime(performance.now() - start)
+      );
     })
     .catch(function(error) {
       console.error(error);
@@ -336,27 +358,16 @@ window.addEventListener(
         Annotations.general.counts;
 
       var readabilityWorker = new PromiseWorker(
-        new Worker(
-          readabilityBaseUrl +
-            "/user/plugins/readability/js/workers/readability.js"
-        )
+        new Worker(readabilityBaseUrl + "/js/workers/readability.js")
       );
       var paragraphsWorker = new PromiseWorker(
-        new Worker(
-          readabilityBaseUrl +
-            "/user/plugins/readability/js/workers/paragraphs.js"
-        )
+        new Worker(readabilityBaseUrl + "/js/workers/paragraphs.js")
       );
       var sentencesWorker = new PromiseWorker(
-        new Worker(
-          readabilityBaseUrl +
-            "/user/plugins/readability/js/workers/sentences.js"
-        )
+        new Worker(readabilityBaseUrl + "/js/workers/sentences.js")
       );
       var wordsWorker = new PromiseWorker(
-        new Worker(
-          readabilityBaseUrl + "/user/plugins/readability/js/workers/words.js"
-        )
+        new Worker(readabilityBaseUrl + "/js/workers/words.js")
       );
 
       if (readabilityTooltips) {

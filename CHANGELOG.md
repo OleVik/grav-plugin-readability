@@ -1,8 +1,12 @@
 # v1.0.3
 ##  XX-06-2019
 
-1. [](#bugfix)
+1. [](#improved)
     * Pathing in scripts, workers
+    * Inline registerPromiseWorker
+    * Console-debug
+2. [](#new)
+    * Visual indicator
 
 # v1.0.2
 ##  15-06-2019
