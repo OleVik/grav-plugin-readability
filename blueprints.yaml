@@ -1,5 +1,5 @@
 name: Readability
-version: 1.0.5
+version: 1.0.6
 description: Measure the readability of your writing.
 icon: file-text-o
 author:
@@ -41,3 +41,10 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
+    max_words:
+      type: number
+      label: PLUGIN_READABILITY.MAX_WORDS.LABEL
+      description: PLUGIN_READABILITY.MAX_WORDS.DESCRIPTION
+      validate:
+        type: number
+        min: 0

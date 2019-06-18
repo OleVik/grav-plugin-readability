@@ -1,3 +1,9 @@
+# v1.0.6
+##  18-06-2019
+
+1. [](#new)
+    * Blueprint-field for max words
+
 # v1.0.5
 ##  18-06-2019
 

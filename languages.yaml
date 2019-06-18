@@ -14,6 +14,9 @@ en:
       DESCRIPTION: Indicate sentence- and word-difficulty with tooltips.
     TOGGLE:
       TITLE: Toggle Readability Report
+    MAX_WORDS:
+      LABEL: Maximum Words
+      DESCRIPTION: Limits highlighting of words beyond a certain amount.
 nb:
   PLUGIN_READABILITY:
     NAME: Lesbarhet
@@ -30,3 +33,6 @@ nb:
       DESCRIPTION: Indiker vanskelighet for setning og ord med tips.
     TOGGLE:
       TITLE: Slå på eller av lesbarhetsrapport
+    MAX_WORDS:
+      LABEL: Maksimum Ord
+      DESCRIPTION: Begrenser utheving av ord etter en viss mengde.
