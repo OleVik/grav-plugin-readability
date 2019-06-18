@@ -1,3 +1,4 @@
 enabled: true
 language: "en-us"
 tooltips: false
+max_words: 500

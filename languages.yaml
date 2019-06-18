@@ -17,7 +17,7 @@ en:
 nb:
   PLUGIN_READABILITY:
     NAME: Lesbarhet
-    SUMMARY: Oppsummering
+    SUMMARY: " "
     HIGHLIGHT: Uthevet
     DETAILS: Detaljer
     REQUIREMENTS:

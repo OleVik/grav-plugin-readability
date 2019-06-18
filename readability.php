@@ -59,12 +59,17 @@ class ReadabilityPlugin extends Plugin
         if ($this->isAdmin() && $this->config->get('plugins.admin.enabled') == true) {
             $this->enable(
                 [
-                    'onTwigTemplatePaths' => ['templates', 0],
                     'onGetPageTemplates' => ['onGetPageTemplates', 0],
                     'onPageInitialized' => ['onAdminPagesAssetsInitialized', 0]
                 ]
             );
         }
+        $this->enable(
+            [
+                'onTwigTemplatePaths' => ['templates', 0],
+                'onTwigExtensions' => ['onTwigExtensions', 0]
+                ]
+        );
         if ($this->config->get('system.debugger.enabled')) {
             $this->grav['debugger']->stopTimer('readability');
         }
@@ -94,7 +99,6 @@ class ReadabilityPlugin extends Plugin
         $types->scanBlueprints($locator->findResource('plugin://' . $this->name . '/blueprints'));
         $types->scanTemplates($locator->findResource('plugin://' . $this->name . '/templates'));
     }
-
     /**
      * Add admin assets
      *
@@ -102,9 +106,13 @@ class ReadabilityPlugin extends Plugin
      */
     public function onAdminPagesAssetsInitialized()
     {
+        if ($this->grav['page']->header()->title != "Pages") {
+            return;
+        }
         $res = Grav::instance()['locator'];
         $path = $res->findResource('plugin://' . $this->name, false);
         $assets = $this->grav['assets'];
+        $assets->addCss($path . '/css/render.css');
         $assets->addCss($path . '/css/admin.css');
         $assets->addJs($path . '/node_modules/promise-worker/dist/promise-worker.min.js');
         if ($this->grav['config']->get('plugins.readability.tooltips')) {
@@ -121,8 +129,14 @@ class ReadabilityPlugin extends Plugin
         $assets->addInlineJs(
             'const readabilityLanguage = "' . self::getLanguage() . '";' . "\n" .
             'const readabilityBaseUrl = "' . $this->grav['uri']->rootUrl(true) . '/' . $path . '";' . "\n" .
-            'const readabilityTooltips = "' . $this->grav['config']->get('plugins.readability.tooltips') . '";'
+            'const readabilityMaxWords = ' . $this->grav['config']->get('plugins.readability.max_words') . ';'
         );
+        if ($this->grav['config']->get('plugins.readability.tooltips')) {
+            $assets->addInlineJs('const readabilityTooltips = true;');
+        } else {
+            $assets->addInlineJs('const readabilityTooltips = false;');
+        }
+        $assets->addJs($path . '/js/render.js', ["group" => "bottom"]);
         $assets->addJs($path . '/js/admin.js', ["group" => "bottom"]);
     }
 
@@ -160,6 +174,19 @@ class ReadabilityPlugin extends Plugin
             $return[$file] = $file;
         }
         return $return;
+    }
+
+    /**
+     * Add Twig Extensions
+     *
+     * @return void
+     */
+    public function onTwigExtensions()
+    {
+        include_once __DIR__ . '/twig/CallStaticExtension.php';
+        $this->grav['twig']->twig->addExtension(new CallStaticTwigExtension());
+        include_once __DIR__ . '/twig/FindResourceExtension.php';
+        $this->grav['twig']->twig->addExtension(new FindResourceTwigExtension());
     }
 
     /**

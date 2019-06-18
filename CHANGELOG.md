@@ -1,3 +1,19 @@
+# v1.0.5
+##  18-06-2019
+
+1. [](#new)
+    * Template-separation
+    * Style-separation
+    * JavaScript-separation
+    * JavaScript Events
+    * Front-end template
+    * Max words option
+    * CallStatic and FindResource Twig-extensions
+2. [](#improved)
+    * Asset-loading in Admin
+    * JavaScript-debug
+    * Norwegian translation
+
 # v1.0.4
 ##  17-06-2019
 

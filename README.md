@@ -25,7 +25,7 @@ To install the plugin manually, download the zip-version of this repository and 
 You should now have all the plugin files under
 
     /your/site/grav/user/plugins/readability
-	
+
 > NOTE: This plugin is a modular component for Grav which may require other plugins to operate, please see its [blueprints.yaml-file on GitHub](https://github.com/OleVik/grav-plugin-readability/blob/master/blueprints.yaml).
 
 ### Admin Plugin
@@ -42,11 +42,12 @@ Here is the default configuration and an explanation of available options:
 enabled: true
 language: "en-us"
 tooltips: false
+max_words: 500
 ```
 
 The `language`-string corresponds to the [patterns defined by the Fluid Project](https://github.com/fluid-project/hyphenation-patterns/tree/master/patterns), specifically the name of the file without the extension.
 
-If `tooltips` is set to `true`, sentences and words can be focused by hovering over them with your mouse pointer, to point out difficulty. The sentence-difficulty is displayed above the sentence, and word-difficulty below the word.
+If `tooltips` is set to `true`, sentences and words can be focused by hovering over them with your mouse pointer, to point out difficulty. The sentence-difficulty is displayed above the sentence, and word-difficulty below the word. `max_words` limits highlighting of words beyond a certain amount.
 
 ## Usage
 

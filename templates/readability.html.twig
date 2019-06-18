@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ "PLUGIN_READABILITY.NAME"|t }}</title>
+  {% block stylesheets %}
+    {% do assets.addCss('plugin://readability/css/render.css') %}
+  {% endblock %}
+
+  {% set readabilityLanguage = callstatic('Grav\\Plugin\\ReadabilityPlugin', 'getLanguage') %}
+  {% block javascripts %}
+    {% do assets.addInlineJs('const start = performance.now();') %}
+    {% do assets.addInlineJs('const readabilityLanguage = "' ~ readabilityLanguage ~ '";') %}
+    {% do assets.addInlineJs('const readabilityBaseUrl = "' ~ uri.rootUrl(true) ~ '/' ~ findresource('plugin://readability') ~ '";') %}
+    {% if config.plugins.readability.tooltips %}
+      {% do assets.addInlineJs('const readabilityTooltips = true;') %}
+      {% do assets.addCss('plugin://readability/node_modules/tippy.js/index.css') %}
+      {% do assets.addCss('plugin://readability/node_modules/tippy.js/themes/light.css') %}
+      {% do assets.addCss('plugin://readability/node_modules/tippy.js/themes/light-border.css') %}
+      {% do assets.addJs('plugin://readability/node_modules/popper.js/dist/umd/popper.min.js', { 'group': 'bottom' }) %}
+      {% do assets.addJs('plugin://readability/node_modules/tippy.js/umd/index.min.js', { 'group': 'bottom' }) %}
+    {% else %}
+      {% do assets.addInlineJs('const readabilityTooltips = false;') %}
+    {% endif %}
+    {% do assets.addInlineJs('const readabilityMaxWords = ' ~ config.plugins.readability.max_words ~ ';') %}
+    {% do assets.addJs('plugin://readability/js/render.js', { 'group': 'bottom' }) %}
+    {% do assets.addJs('plugin://readability/node_modules/promise-worker/dist/promise-worker.min.js', { 'group': 'bottom' }) %}
+    {% do assets.addJs('plugin://readability/node_modules/localized-readability/dist/hypher.js', { 'group': 'bottom' }) %}
+    {% do assets.addJs('plugin://readability/node_modules/localized-readability/dist/patterns/' ~ readabilityLanguage ~ '.js', { 'group': 'bottom' }) %}
+    {% do assets.addJs('plugin://readability/node_modules/localized-readability/dist/annotations/language.' ~ readabilityLanguage ~ '.js', { 'group': 'bottom' }) %}
+    {% do assets.addJs('plugin://readability/node_modules/localized-readability/dist/localized-readability.min.js', { 'group': 'bottom' }) %}
+    {% do assets.addInlineJs('const input = `' ~ page.title ~ "\n\n" ~ page.rawMarkdown ~ '`;', {'group': 'bottom'}) %}
+    {% do assets.addInlineJs('const themePath = "' ~ theme_url ~ '";', {'group': 'bottom'}) %}
+  {% endblock %}
+
+  {{ assets.css()|raw }}
+  {{ assets.js()|raw }}
+</head>
+<body>
+  {% block header %}{% endblock %}
+  {% block content %}
+    {% include 'partials/readability.html.twig' %}
+  {% endblock %}
+  {% block footer %}{% endblock %}
+  {% block bottom %}
+    <script type="text/javascript">
+    document.addEventListener("readability", function(event) {
+      console.debug(event.detail.message);
+      if (event.detail.state == "end-score") {
+        document.querySelector(".readability").style.display = "grid";
+      }
+    });
+    window.addEventListener(
+      "load",
+      function(event) {
+        if (
+          window.Worker
+        ) {
+          const Highlighter = window.LocalizedReadability.highlighter;
+          const Annotations = window.Annotations;
+          document.querySelector(".readability #header-interpretations").innerHTML =
+            Annotations.general.interpretations;
+          document.querySelector(".readability #header-counts").innerHTML =
+            Annotations.general.counts;
+          const readabilityWorker = new PromiseWorker(
+            new Worker(readabilityBaseUrl + "/js/workers/readability.js")
+          );
+          const paragraphsWorker = new PromiseWorker(
+            new Worker(readabilityBaseUrl + "/js/workers/paragraphs.js")
+          );
+          const sentencesWorker = new PromiseWorker(
+            new Worker(readabilityBaseUrl + "/js/workers/sentences.js")
+          );
+          const wordsWorker = new PromiseWorker(
+            new Worker(readabilityBaseUrl + "/js/workers/words.js")
+          );
+          renderAnalysis(
+            input,
+            readabilityLanguage,
+            Highlighter,
+            Annotations,
+            readabilityWorker,
+            paragraphsWorker,
+            sentencesWorker,
+            wordsWorker
+          );
+        }
+      },
+      false
+    );
+    </script>
+    {{ assets.js('bottom')|raw }}
+  {% endblock %}
+</body>
+</html>
