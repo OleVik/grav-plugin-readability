@@ -1,3 +1,9 @@
+# v1.0.7
+##  24-06-2019
+
+1. [](#improved)
+    * Separate screen- and print-styles
+
 # v1.0.6
 ##  18-06-2019
 
