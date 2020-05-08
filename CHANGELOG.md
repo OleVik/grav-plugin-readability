@@ -1,3 +1,14 @@
+# v1.1.0
+##  08-05-2020
+
+1. [](#new)
+    * TinyMCE-editor compatibility
+2. [](#improved)
+    * Filenames
+3. [](#bugfix)
+    * Pages-check
+    * Docs-link
+
 # v1.0.7
 ##  24-06-2019
 

@@ -17,7 +17,7 @@ function renderButton() {
   titlebar.prepend(button);
 }
 
-document.addEventListener("readability", function(event) {
+document.addEventListener("readability", function (event) {
   console.debug(event.detail.message);
   if (event.detail.state == "start-score") {
     document
@@ -42,7 +42,7 @@ document.addEventListener("readability", function(event) {
 });
 window.addEventListener(
   "load",
-  function(event) {
+  function (event) {
     if (
       window.Worker &&
       document.querySelector('textarea[name="data[content]"]')
@@ -73,7 +73,7 @@ window.addEventListener(
 
       if (readabilityTooltips) {
         tippy.setDefaults({
-          arrow: true
+          arrow: true,
         });
       }
 
@@ -81,9 +81,16 @@ window.addEventListener(
       if (readabilityButton) {
         readabilityButton.addEventListener(
           "click",
-          function(event) {
+          function (event) {
+            const markdownEditor = document.querySelector(
+              'textarea[name="data[content]"]'
+            );
+            const currentContent =
+              typeof tinyMCE !== "undefined"
+                ? tinyMCE.activeEditor.getContent({ format: "text" })
+                : markdownEditor.value;
             renderAnalysis(
-              document.querySelector('textarea[name="data[content]"]').value,
+              currentContent,
               lang,
               Highlighter,
               Annotations,
@@ -101,7 +108,7 @@ window.addEventListener(
       if (readabilityToggle) {
         readabilityToggle.addEventListener(
           "click",
-          function(event) {
+          function (event) {
             const readabilityElement = document.querySelector(".readability");
             if (readabilityElement.style.display == "grid") {
               readabilityToggle.classList.remove("fa-chevron-up");

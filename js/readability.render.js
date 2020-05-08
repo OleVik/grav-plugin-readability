@@ -237,8 +237,8 @@ function renderAnalysis(
         state: "start-readability",
         message:
           "Starting Readability Analysis: " +
-          msToTime(performance.now() - start)
-      }
+          msToTime(performance.now() - start),
+      },
     })
   );
   const results = {};
@@ -246,21 +246,21 @@ function renderAnalysis(
     new CustomEvent("readability", {
       detail: {
         state: "start-score",
-        message: "Start Score: " + msToTime(performance.now() - start)
-      }
+        message: "Start Score: " + msToTime(performance.now() - start),
+      },
     })
   );
   return readabilityWorker
     .postMessage({ input: input, lang: lang, path: readabilityBaseUrl })
-    .then(function(response) {
+    .then(function (response) {
       results.data = response;
       renderScore(results.data, Annotations);
       document.dispatchEvent(
         new CustomEvent("readability", {
           detail: {
             state: "end-score",
-            message: "End Score: " + msToTime(performance.now() - start)
-          }
+            message: "End Score: " + msToTime(performance.now() - start),
+          },
         })
       );
       const nlcst = results.data.setup.nlcst;
@@ -268,13 +268,13 @@ function renderAnalysis(
         new CustomEvent("readability", {
           detail: {
             state: "start-paragraphs",
-            message: "Start Paragraphs: " + msToTime(performance.now() - start)
-          }
+            message: "Start Paragraphs: " + msToTime(performance.now() - start),
+          },
         })
       );
       return paragraphsWorker.postMessage({ nlcst, path: readabilityBaseUrl });
     })
-    .then(function(response) {
+    .then(function (response) {
       results.paragraphs = response;
       document.getElementsByTagName(
         "content"
@@ -283,8 +283,8 @@ function renderAnalysis(
         new CustomEvent("readability", {
           detail: {
             state: "end-paragraphs",
-            message: "End Paragraphs: " + msToTime(performance.now() - start)
-          }
+            message: "End Paragraphs: " + msToTime(performance.now() - start),
+          },
         })
       );
       const nlcst = results.paragraphs;
@@ -292,13 +292,13 @@ function renderAnalysis(
         new CustomEvent("readability", {
           detail: {
             state: "start-sentences",
-            message: "Start Sentences: " + msToTime(performance.now() - start)
-          }
+            message: "Start Sentences: " + msToTime(performance.now() - start),
+          },
         })
       );
       return sentencesWorker.postMessage({ nlcst, path: readabilityBaseUrl });
     })
-    .then(function(response) {
+    .then(function (response) {
       results.sentences = response;
       document.getElementsByTagName(
         "content"
@@ -307,8 +307,8 @@ function renderAnalysis(
         new CustomEvent("readability", {
           detail: {
             state: "end-sentences",
-            message: "End Sentences: " + msToTime(performance.now() - start)
-          }
+            message: "End Sentences: " + msToTime(performance.now() - start),
+          },
         })
       );
       const nlcst = results.sentences;
@@ -316,21 +316,21 @@ function renderAnalysis(
         new CustomEvent("readability", {
           detail: {
             state: "start-words",
-            message: "Start Words: " + msToTime(performance.now() - start)
-          }
+            message: "Start Words: " + msToTime(performance.now() - start),
+          },
         })
       );
       if (results.data.count.words <= readabilityMaxWords) {
         return wordsWorker.postMessage({
           nlcst,
           lang: lang,
-          path: readabilityBaseUrl
+          path: readabilityBaseUrl,
         });
       } else {
         return "skipped";
       }
     })
-    .then(function(response) {
+    .then(function (response) {
       results.words = response;
       if (results.words != "skipped") {
         document.getElementsByTagName(
@@ -341,8 +341,8 @@ function renderAnalysis(
         new CustomEvent("readability", {
           detail: {
             state: "end-words",
-            message: "End Words: " + msToTime(performance.now() - start)
-          }
+            message: "End Words: " + msToTime(performance.now() - start),
+          },
         })
       );
       if (readabilityTooltips) {
@@ -350,8 +350,8 @@ function renderAnalysis(
           new CustomEvent("readability", {
             detail: {
               state: "start-tooltips",
-              message: "Start Tooltips: " + msToTime(performance.now() - start)
-            }
+              message: "Start Tooltips: " + msToTime(performance.now() - start),
+            },
           })
         );
         createTooltips();
@@ -359,8 +359,8 @@ function renderAnalysis(
           new CustomEvent("readability", {
             detail: {
               state: "end-tooltips",
-              message: "End Tooltips: " + msToTime(performance.now() - start)
-            }
+              message: "End Tooltips: " + msToTime(performance.now() - start),
+            },
           })
         );
       }
@@ -370,12 +370,12 @@ function renderAnalysis(
             state: "end-readability",
             message:
               "Finished Readability Analysis: " +
-              msToTime(performance.now() - start)
-          }
+              msToTime(performance.now() - start),
+          },
         })
       );
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.error(error);
       return Promise.reject(error);
     });

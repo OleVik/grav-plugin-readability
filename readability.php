@@ -14,6 +14,7 @@
 namespace Grav\Plugin;
 
 use Grav\Common\Grav;
+use Grav\Common\Utils;
 use Grav\Common\Plugin;
 use RocketTheme\Toolbox\Event\Event;
 
@@ -106,14 +107,14 @@ class ReadabilityPlugin extends Plugin
      */
     public function onAdminPagesAssetsInitialized()
     {
-        if ($this->grav['page']->header()->title != "Pages") {
+        if (!Utils::contains($this->grav['uri']->path(), 'pages', false)) {
             return;
         }
         $res = Grav::instance()['locator'];
         $path = $res->findResource('plugin://' . $this->name, false);
         $assets = $this->grav['assets'];
-        $assets->addCss($path . '/css/render.css');
-        $assets->addCss($path . '/css/admin.css');
+        $assets->addCss($path . '/css/readability.render.css');
+        $assets->addCss($path . '/css/readability.admin.css');
         $assets->addJs($path . '/node_modules/promise-worker/dist/promise-worker.min.js');
         if ($this->grav['config']->get('plugins.readability.tooltips')) {
             $assets->addCss($path . '/node_modules/tippy.js/index.css');
@@ -136,8 +137,8 @@ class ReadabilityPlugin extends Plugin
         } else {
             $assets->addInlineJs('const readabilityTooltips = false;');
         }
-        $assets->addJs($path . '/js/render.js', ["group" => "bottom"]);
-        $assets->addJs($path . '/js/admin.js', ["group" => "bottom"]);
+        $assets->addJs($path . '/js/readability.render.js', ["group" => "bottom"]);
+        $assets->addJs($path . '/js/readability.admin.js', ["group" => "bottom"]);
     }
 
     /**
