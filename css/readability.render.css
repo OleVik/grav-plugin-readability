@@ -4,10 +4,10 @@
 .readability {
   box-sizing: border-box;
   display: none;
-  grid-template-columns: 66% 33%;
-  grid-gap: 0.5em 1em;
+  grid-template-columns: 100%;
+  grid-gap: 0.5rem 1rem;
   width: 100%;
-  padding: 2em;
+  padding: 2rem;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
     "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
   word-break: break-word;
@@ -15,7 +15,6 @@
 .readability header {
   display: grid;
   grid-gap: 0.5em 1em;
-  grid-template-columns: 3fr 2fr 2fr;
   grid-template-rows: auto;
   grid-column: span 2;
   margin: 0;
@@ -42,15 +41,15 @@
   font-weight: 100;
 }
 .readability header section value {
-  font-size: 2.5em;
+  font-size: 2.5rem;
 }
 .readability main section,
 .readability aside section {
   display: grid;
-  grid-gap: 0.5em 1em;
-  grid-template-columns: repeat(2, 1fr) repeat(4, auto);
+  grid-gap: 0.5rem 1rem;
+  grid-template-columns: auto;
   grid-template-rows: auto;
-  margin: 0 1em 1em 1em;
+  margin: 0 0.25rem 0.25rem 0.25rem;
 }
 .readability section#count {
   grid-template-columns: repeat(2, 1fr);
@@ -59,11 +58,11 @@
   grid-column: auto;
 }
 .readability label {
-  padding: 0.25em;
+  padding: 0.25rem;
 }
 .readability value,
 .readability .value {
-  padding: 0.25em;
+  padding: 0.25rem;
   font-weight: bold;
 }
 .readability .title,
@@ -74,7 +73,7 @@
 }
 .readability content {
   display: block;
-  margin: 1em;
+  margin: 1rem;
   padding: 0;
 }
 .readability mark {
@@ -117,18 +116,18 @@
   padding: 0.15em 0;
 }
 .readability h3 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: 100;
-  margin: 0.5em;
+  margin: 0.25rem;
   padding: 0;
 }
 .readability h4 {
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0;
 }
 .readability p {
-  margin: 1em 0;
+  margin: 1rem 0;
   padding: 0;
 }
 .readability a {
@@ -146,6 +145,7 @@
 @media screen {
   .readability main,
   .readability aside {
+    grid-column: 1;
     background-color: hsl(0, 0%, 97.5%);
     border: 1px solid #e1e4e8;
   }
@@ -155,7 +155,7 @@
   }
   .readability value,
   .readability .value {
-    padding: 0.25em;
+    padding: 0.25rem;
     font-weight: bold;
   }
 }
@@ -192,9 +192,51 @@
     margin: 0;
   }
   .readability content p {
-    margin: 0.5em 0;
+    margin: 0.5rem 0;
   }
   .readability h2 {
     text-align: left;
+  }
+}
+
+@media (min-width: 576px) {
+  .readability h3 {
+    margin: 0.5rem;
+  }
+  .readability header {
+    grid-template-columns: 3fr 2fr 2fr;
+  }
+  .readability main section,
+  .readability aside section {
+    grid-template-columns: repeat(6, 1fr);
+    margin: 0 0.5rem 0.5rem 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .readability {
+    grid-template-columns: 66% 33%;
+  }
+  .readability h3 {
+    margin: 0.75rem;
+  }
+  .readability main,
+  .readability aside {
+    grid-column: auto;
+  }
+  .readability main section,
+  .readability aside section {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 0.75rem 0.75rem 0.75rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .readability h3 {
+    margin: 1rem;
+  }
+  .readability main section,
+  .readability aside section {
+    margin: 0 1rem 1rem 1rem;
   }
 }

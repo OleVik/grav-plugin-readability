@@ -185,9 +185,9 @@ class ReadabilityPlugin extends Plugin
     public function onTwigExtensions()
     {
         include_once __DIR__ . '/twig/CallStaticExtension.php';
-        $this->grav['twig']->twig->addExtension(new CallStaticTwigExtension());
+        $this->grav['twig']->twig->addExtension(new ReadabilityPlugin\CallStaticTwigExtension());
         include_once __DIR__ . '/twig/FindResourceExtension.php';
-        $this->grav['twig']->twig->addExtension(new FindResourceTwigExtension());
+        $this->grav['twig']->twig->addExtension(new ReadabilityPlugin\FindResourceTwigExtension());
     }
 
     /**

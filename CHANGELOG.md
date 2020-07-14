@@ -1,3 +1,11 @@
+# v2.0.0
+##  14-07-2020
+
+1. [](#new)
+    * Responsive CSS
+2. [](#bugfix)
+    * Twig-extensions namespacing
+
 # v1.1.0
 ##  08-05-2020
 

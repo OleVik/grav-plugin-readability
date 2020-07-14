@@ -1,5 +1,5 @@
 <?php
-namespace Grav\Plugin;
+namespace Grav\Plugin\ReadabilityPlugin;
 
 use Grav\Common\Grav;
 use Grav\Common\Plugin;
