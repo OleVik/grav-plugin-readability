@@ -1,3 +1,14 @@
+# v2.1.0
+##  20-07-2020
+
+1. [](#new)
+    * Add German
+    * Bump library-version
+2. [](#improved)
+    * Use user's language
+    * Fall back to default language
+    * Note used language in browser console
+
 # v2.0.0
 ##  14-07-2020
 

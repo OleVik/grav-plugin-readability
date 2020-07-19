@@ -8,7 +8,7 @@ en:
       AGE: Age needed for reading
       GRADE: Grade needed for reading
     LANGUAGE:
-      DESCRIPTION: Language to use for measuring readability.
+      DESCRIPTION: Default language to use for measuring readability.
     TOOLTIPS:
       LABEL: Tooltips
       DESCRIPTION: Indicate sentence- and word-difficulty with tooltips.

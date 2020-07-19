@@ -150,10 +150,21 @@ class ReadabilityPlugin extends Plugin
      */
     public static function getLanguage($default = 'en-us')
     {
-        if (Grav::instance()['config']->get('plugins.readability.language')) {
-            return Grav::instance()['config']->get('plugins.readability.language');
+        if (Grav::instance()['language']->getLanguage()) {
+            $lang = Grav::instance()['language']->getLanguage();
+        } else {
+            if (Grav::instance()['config']->get('plugins.readability.language')) {
+                return Grav::instance()['config']->get('plugins.readability.language');
+            } else {
+                return $default;
+            }
         }
-        return Grav::instance()['language']->getLanguage() ?: $default;
+        if ($lang == 'en') {
+            $lang = $default;
+        } elseif ($lang == 'nb') {
+            $lang = 'nb-no';
+        }
+        return $lang;
     }
 
     /**

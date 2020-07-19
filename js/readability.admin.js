@@ -82,6 +82,7 @@ window.addEventListener(
         readabilityButton.addEventListener(
           "click",
           function (event) {
+            console.debug(`Readability language: ${lang}`);
             const markdownEditor = document.querySelector(
               'textarea[name="data[content]"]'
             );
