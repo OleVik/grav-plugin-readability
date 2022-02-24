@@ -1,3 +1,9 @@
+# v2.1.1
+##  24-02-2022
+
+1. [](#bugfix)
+    * Fix boolean-error for PHP 8
+
 # v2.1.0
 ##  20-07-2020
 
