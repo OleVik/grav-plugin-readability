@@ -15,7 +15,7 @@ class FindResourceTwigExtension extends \Twig_Extension
             new \Twig_SimpleFunction('findresource', [$this, 'getter'])
         ];
     }
-    public function getter(string $uri, boolean $absolute = null, boolean $first = null)
+    public function getter(string $uri, bool $absolute = null, bool $first = null)
     {
         return Grav::instance()['locator']->findResource($uri, $absolute, $first);
     }
